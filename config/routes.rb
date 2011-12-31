@@ -3,6 +3,7 @@ Ayumu::Application.routes.draw do
 
   get "index/index"
   resources :notes
+  resources :categories
   root :to => 'index#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.

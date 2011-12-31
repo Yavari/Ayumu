@@ -40,6 +40,6 @@ class NoteTest < ActiveSupport::TestCase
     note = Note.find(note.id)
     assert_equal 4, note.categories.count
 
-    assert_equal 5, Category.all.count
+    assert_equal 6, Category.all.count
   end
 end
