@@ -2,6 +2,7 @@ class Category < ActiveRecord::Base
   has_many :category_note_bindings
   has_many :notes, :through => :category_note_bindings
   
+  validates :name, :presence => true
   
   def self.update_order(id, order)
     category = find(id)

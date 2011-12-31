@@ -2,6 +2,8 @@ class Note < ActiveRecord::Base
   has_many :category_note_bindings
   has_many :categories, :through => :category_note_bindings
   
+  validates :title, :presence => true
+  validates :content, :presence => true
   def self.find_all_by_category_id(id)
     return Note.all(:conditions => ['category_note_bindings.category_id == ?', id],
                         :include => [:category_note_bindings],

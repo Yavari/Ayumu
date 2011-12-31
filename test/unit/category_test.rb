@@ -4,17 +4,17 @@ class CategoryTest < ActiveSupport::TestCase
   test "Can update order" do
     category = Category.create :name => "test"
 
-    note1 = Note.new :title => "1"
+    note1 = Note.new(:title => "1", :content => "content")
     note1.categories <<  category
-    note1.save
+    note1.save!
 
-    note2 = Note.new :title => "2"
+    note2 = Note.new(:title => "2", :content => "content")
     note2.categories <<  category
-    note2.save
+    note2.save!
 
-    note3 = Note.new :title => "3"
+    note3 = Note.new(:title => "3", :content => "content")
     note3.categories <<  category
-    note3.save
+    note3.save!
 
     notes = Note.find_all_by_category_id category.id
     assert_equal 3, notes.count

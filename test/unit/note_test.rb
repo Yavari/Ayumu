@@ -14,13 +14,13 @@ class NoteTest < ActiveSupport::TestCase
   
   test "Can find all notes by category" do
     category = Category.new(:name => "test")
-    note = Note.create(:title => "1")
+    note = Note.create(:title => "1", :content => "content")
     note.categories << category
-    note.save
+    note.save!
     
-    note = Note.create(:title => "2")
+    note = Note.create(:title => "2", :content => "content")
     note.categories << category
-    note.save
+    note.save!
     
     notes = Note.find_all_by_category_id category.id
     assert_equal 2, notes.count
