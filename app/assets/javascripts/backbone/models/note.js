@@ -7,13 +7,14 @@
 		},
 		
 		defaults : {
-		  title: "sdf",
-		  content: "sdf"
+		  title: null,
+		  content: null,
+		  errors: null
 		}
 	});
 
 	Ayumu.Collections.NoteCollection = Backbone.Collection.extend({
 		url : '/notes',
-		model : Ayumu.Models.Category
+		model : Ayumu.Models.Notes
 	});
 }).call(this);

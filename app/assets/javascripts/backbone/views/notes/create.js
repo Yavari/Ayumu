@@ -9,28 +9,45 @@
 		},
 		initialize: function () {
 			_.bindAll(this, 'render', 'cancel', 'save');
+			this.model = new this.collection.model();
+			this.model.set({title : null, content : null});
 		},
 
-		render: function () {
-			$(this.el).html(this.template());
+		render: function(){
+			$(this.el).html(this.template(this.model.toJSON()));
+			this.$("form").backboneLink(this.model);
 			return this;
 		},
 		show: function(){
+			var _this = this;
+      		this.model.bind("change:errors", function() {
+        		return _this.render();
+			});
 			$(this.el).modal({
 				backdrop: 'static',
 				keyboard: false,
 				show: true
 			});
 		},
+
 		
-		save: function(){
-			var title = $("input[name='title']", this.el).val();
-			var content = $("textarea[name='content']", this.el).val();
-			var note = new Ayumu.Models.Note();
-			note.set({title: title, content: content});
-			note.save();
-			this.collection.add(note);
-			this.cancel();
+		save: function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			this.model.unset("errors");
+			debugger;
+			var _this = this;
+      		return this.collection.create(this.model.toJSON(), {
+			success: function(note) {
+			  _this.model = note;
+			  _this.cancel();
+			},
+			error: function(post, jqXHR) {
+			  return _this.model.set({
+			    errors: $.parseJSON(jqXHR.responseText)
+			  });
+			}
+      });
 		},
 		
 		cancel: function () {

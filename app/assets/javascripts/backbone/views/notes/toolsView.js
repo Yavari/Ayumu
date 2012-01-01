@@ -10,12 +10,12 @@
 
 		render: function () {
 			$(this.el).html(this.template());
-		 	this.addNoteView = new Ayumu.Views.Notes.Create ({collection : this.collection});
-			$('#container').append(this.addNoteView.render().el);
 			return this;
 		},
 		
 		add_note: function () {
+		 	this.addNoteView = new Ayumu.Views.Notes.Create ({collection : this.collection});
+			$('#addNoteView').html(this.addNoteView.render().el);
 			this.addNoteView.show();
 		}
 	});
