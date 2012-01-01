@@ -1,5 +1,6 @@
 (function() {
-	Ayumu.Views.NoteToolsView = Backbone.View.extend({
+	Ayumu.Views.Notes = Ayumu.Views.Notes || {};
+	Ayumu.Views.Notes.ToolsView = Backbone.View.extend({
 		template: JST["backbone/templates/notes/tools"],
 		events: {
 			'click .add': 'add_note',
@@ -14,7 +15,7 @@
 		},
 		
 		add_note: function () {
-		 	this.addNoteView = new Ayumu.Views.Notes.Create ({collection : this.collection});
+		 	this.addNoteView = new Ayumu.Views.Notes.CreateView ({collection : this.collection});
 			$('#addNoteView').html(this.addNoteView.render().el);
 			this.addNoteView.show();
 		}

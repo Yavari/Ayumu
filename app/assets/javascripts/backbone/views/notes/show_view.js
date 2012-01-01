@@ -1,5 +1,6 @@
 (function() {
-	Ayumu.Views.NoteView = Backbone.View.extend({
+	Ayumu.Views.Notes = Ayumu.Views.Notes || {};
+	Ayumu.Views.Notes.ShowView = Backbone.View.extend({
 		template: JST["backbone/templates/notes/note"],
 		events: {
 		},

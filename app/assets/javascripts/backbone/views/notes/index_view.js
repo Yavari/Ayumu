@@ -1,5 +1,6 @@
 (function() {
-	Ayumu.Views.MainWindowNotesView = Backbone.View.extend({
+	Ayumu.Views.Notes = Ayumu.Views.Notes || {};
+	Ayumu.Views.Notes.IndexView = Backbone.View.extend({
         template: JST["backbone/templates/notes/notes"],
         events: {
         },
@@ -11,7 +12,7 @@
         render: function () {       
             $(this.el).html(this.template({}));
             this.collection.each(function (note) {
-                var view = new Ayumu.Views.NoteView({
+                var view = new Ayumu.Views.Notes.ShowView({
                     model: note,
                     collection: this.collection
                 });

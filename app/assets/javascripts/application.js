@@ -16,14 +16,14 @@
 
 $(function () {
     var notes = new Ayumu.Collections.NoteCollection();
-    var notesView = new Ayumu.Views.MainWindowNotesView ({collection : notes});
+    var notesView = new Ayumu.Views.Notes.IndexView ({collection : notes});
     $('#container').append(notesView.render().el);
     
     var categories = new Ayumu.Collections.CategoryCollection();
     var categoriesView = new Ayumu.Views.SidebarCategoriesView ({collection : categories});
     $('.sidebar .categories').append(categoriesView.render().el);
     
- 	$('#noteTools').html((new Ayumu.Views.NoteToolsView ({collection : notes})).render().el);
+ 	$('#noteTools').html((new Ayumu.Views.Notes.ToolsView ({collection : notes})).render().el);
     categories.fetch();
     notes.fetch();
 });

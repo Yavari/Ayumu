@@ -1,10 +1,10 @@
 (function() {
 	Ayumu.Views.Notes = Ayumu.Views.Notes || {};
-	Ayumu.Views.Notes.Create = Backbone.View.extend({
+	Ayumu.Views.Notes.CreateView = Backbone.View.extend({
 		template: JST["backbone/templates/notes/create"],
 		className : "modal hide fade",
 		events: {
-			'click .success': 'save',	
+			'submit form': 'save',	
 			'click .danger': 'cancel',
 		},
 		initialize: function () {
@@ -35,7 +35,6 @@
 			e.preventDefault();
 			e.stopPropagation();
 			this.model.unset("errors");
-			debugger;
 			var _this = this;
       		return this.collection.create(this.model.toJSON(), {
 			success: function(note) {
