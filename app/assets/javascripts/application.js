@@ -14,16 +14,10 @@
 //= require backbone/ayumu
 //= require_tree .
 
-$(function () {
-    var notes = new Ayumu.Collections.NoteCollection();
-    var notesView = new Ayumu.Views.Notes.IndexView ({collection : notes});
-    $('#container').append(notesView.render().el);
-    
+$(function () {    
     var categories = new Ayumu.Collections.CategoryCollection();
-    var categoriesView = new Ayumu.Views.SidebarCategoriesView ({collection : categories});
+    var categoriesView = new Ayumu.Views.Categories.IndexView ({collection : categories});
     $('.sidebar .categories').append(categoriesView.render().el);
-    
- 	$('#noteTools').html((new Ayumu.Views.Notes.ToolsView ({collection : notes})).render().el);
+    categoriesView.showAllNotes();
     categories.fetch();
-    notes.fetch();
 });

@@ -1,12 +1,19 @@
+require 'pp'
 class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
-
+    category_id = params[:category_id];
+    puts "apa"
+    pp category_id
+    if(category_id.nil?)
+      @notes = Note.all(:include => [:categories])
+    else
+      @notes = Category.find(category_id).notes
+    end
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @notes }
+      format.json { render json: @notes.to_json(:include => :categories) }
     end
   end
 

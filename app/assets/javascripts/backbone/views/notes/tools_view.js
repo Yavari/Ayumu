@@ -3,7 +3,7 @@
 	Ayumu.Views.Notes.ToolsView = Backbone.View.extend({
 		template: JST["backbone/templates/notes/tools"],
 		events: {
-			'click .add': 'add_note',
+			'click .add': 'add_note'
 		},
 		initialize: function () {
 			_.bindAll(this, 'render');

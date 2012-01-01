@@ -14,7 +14,11 @@
 	});
 
 	Ayumu.Collections.NoteCollection = Backbone.Collection.extend({
-		url : '/notes',
+		url : function() {
+			if(this.categoryId > 0)
+				return '/categories/' + this.categoryId + '/notes';
+			return '/notes';
+		},
 		model : Ayumu.Models.Notes
 	});
 }).call(this);
