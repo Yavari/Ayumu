@@ -8,7 +8,7 @@ class CategoryNoteBindingTest < ActiveSupport::TestCase
 
     note = Note.find(note.id)
     assert_equal 1, note.category_note_bindings[0].position
-    assert_equal 2, note.category_note_bindings[1].position
+    assert_equal 1, note.category_note_bindings[1].position
     assert_equal 2, note.categories.count
   end
 

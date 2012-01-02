@@ -7,7 +7,7 @@ class CategoryNoteBinding < ActiveRecord::Base
   
   
   def update_position
-    self.position = CategoryNoteBinding.maximum('position')
+    self.position = CategoryNoteBinding.maximum('position', :conditions => ["category_id = ?", category_id])
     if(self.position == nil)
       self.position = 1
     else
