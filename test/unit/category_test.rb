@@ -27,4 +27,14 @@ class CategoryTest < ActiveSupport::TestCase
     assert_equal note1.id, notes[1].id
     assert_equal note2.id, notes[2].id
   end
+  
+  test "can search for categories" do
+    Category.create :name => "cat1"
+    Category.create :name => "cat2"
+    Category.create :name => "1cat"
+    Category.create :name => "2cat"
+    Category.create :name => "hello"
+    categories = Category.search("cat")
+    assert_equal 2, categories.count
+  end
 end

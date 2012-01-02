@@ -4,8 +4,6 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     category_id = params[:category_id];
-    puts "apa"
-    pp category_id
     if(category_id.nil?)
       @notes = Note.all(:include => [:categories])
     else
@@ -48,11 +46,11 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(params[:note])
-
+    @note.update_categories params[:categories]
     respond_to do |format|
       if @note.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
-        format.json { render json: @note, status: :created, location: @note }
+        format.json { render json: @note.to_json(:include => :categories), status: :created, location: @note }
       else
         format.html { render action: "new" }
         format.json { render json: @note.errors, status: :unprocessable_entity }

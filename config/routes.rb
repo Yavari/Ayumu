@@ -5,6 +5,9 @@ Ayumu::Application.routes.draw do
   resources :notes
   resources :categories do
     resources :notes
+    collection  do
+      get 'search'
+    end
   end
   root :to => 'index#index'
   # The priority is based upon order of creation:

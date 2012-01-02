@@ -10,12 +10,19 @@
 		initialize: function () {
 			_.bindAll(this, 'render', 'cancel', 'save');
 			this.model = new this.collection.model();
-			this.model.set({title : null, content : null});
+			this.model.set({title : null, content : null, categories : []});
 		},
 
 		render: function(){
 			$(this.el).html(this.template(this.model.toJSON()));
 			this.$("form").backboneLink(this.model);
+			$('[name="categories"]', this.el).tagHandler({
+				assignedTags: this.model.get('categories'),
+		 		getURL: '/categories/search',
+				autocomplete: true,
+			 	initLoad: false,
+                minChars: 2
+			});
 			return this;
 		},
 		show: function(){
@@ -30,10 +37,12 @@
 			});
 		},
 
-		
 		save: function(e){
 			e.preventDefault();
 			e.stopPropagation();
+			this.model.set({
+				categories: $('[name="categories"]', this.el).tagHandler("getTags")
+			});
 			this.model.unset("errors");
 			var _this = this;
       		return this.collection.create(this.model.toJSON(), {
