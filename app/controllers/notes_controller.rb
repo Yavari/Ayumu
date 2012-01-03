@@ -1,4 +1,3 @@
-require 'pp'
 class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json

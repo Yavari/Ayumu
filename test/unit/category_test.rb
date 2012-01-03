@@ -34,7 +34,38 @@ class CategoryTest < ActiveSupport::TestCase
     Category.create :name => "1cat"
     Category.create :name => "2cat"
     Category.create :name => "hello"
-    categories = Category.search("cat")
+    categories = Category.search("/cat")
     assert_equal 2, categories.count
   end
+  
+  test "can find parent" do
+    category = Category.create(:name => "/first level 1/second level 1")
+    assert_equal('/first level 1', category.find_parent().name)
+  end
+  
+  test "can find children" do
+    parent = Category.create(:name => "/first level 1")
+    Category.create(:name => "/first level 2")
+    Category.create(:name => "/1/first level 1")
+    Category.create(:name => "/first level 1/second level 1")
+    Category.create(:name => "/first level 1/second level 2")
+    Category.create(:name => "/first level 1/second level 2/third level 1")
+    
+    category = Category.find(parent.id)
+    assert_equal(2, category.find_children().count())
+  end
+  
+  test "can update name" do
+    category = Category.create(:name => "/first level 1")
+    Category.create(:name => "/first level 2")
+    Category.create(:name => "/1/first level 1")
+    Category.create(:name => "/first level 1/second level 1")
+    Category.create(:name => "/first level 1/second level 2")
+    Category.create(:name => "/first level 1/second level 2/third level 1")  
+    category.name = "/new"
+    categories = Category.search('/new')
+    assert_equal(4, categories.count())
+  end
+  
+  
 end

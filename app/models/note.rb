@@ -1,6 +1,6 @@
 class Note < ActiveRecord::Base
-  has_many :category_note_bindings
-  has_many :categories, :through => :category_note_bindings
+  has_many(:category_note_bindings)
+  has_many(:categories, :through => :category_note_bindings)
   
   validates :title, :presence => true
   validates :content, :presence => true
