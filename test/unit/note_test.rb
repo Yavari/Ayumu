@@ -27,15 +27,17 @@ class NoteTest < ActiveSupport::TestCase
   end
   
   test "Can update categories" do
-    Category.create :name => "Ruby"
+    Category.create(:name => "Ruby")
     note = Note.create(:title => "Development", :content => "Some text")
     note.categories << Category.new(:name => "Development")
     note.categories << Category.create(:name => "General")
-    note.save
+    note.save()
 
     note = Note.find(note.id)
-    note.update_categories ["General", "Software", "other", "ruby"]
-    note.save
+    note.update_categories(["General", "Software", "other", "ruby"])
+    note.categories.each do |c| 
+    end
+    note.save()
 
     note = Note.find(note.id)
     assert_equal 4, note.categories.count

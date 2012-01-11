@@ -18,7 +18,7 @@ class Note < ActiveRecord::Base
   private
   def new_categories(new_categories)
     new_categories.each do |category|
-      if !self.categories.any? {|c| c.name.downcase == category.downcase}
+      if !self.categories.any? {|c| c.name.downcase == Category.get_name_with_path(category.downcase)}
         self.categories << Category.find_or_create_by_name(category)
       end
     end  
@@ -26,7 +26,7 @@ class Note < ActiveRecord::Base
   
   def remove_old_categories(new_categories)
     self.categories.each do |category|
-      if !new_categories.any? {|c| c.downcase == category.name.downcase}
+      if !new_categories.any? {|c| Category.get_name_with_path(c.downcase) == category.name.downcase}
         self.categories.delete(category)
       end
     end
